@@ -14,6 +14,7 @@ const main = async () => {
   try {
     await pgclient.connect();
 
+    console.log("connection success");
     const table =
       "CREATE TABLE student(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL, lastName VARCHAR(40) NOT NULL, age INT, address VARCHAR(80), email VARCHAR(40))";
     const text =
@@ -39,6 +40,9 @@ const main = async () => {
       console.log(err, res.rows); // Print the data in student table
       pgclient.end();
     });
-  } catch {}
+  } catch (err) {
+    console.log("not connected");
+    throw err;
+  }
 };
 main();
